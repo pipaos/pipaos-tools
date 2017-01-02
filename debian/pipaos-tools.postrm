@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# debian postinst script
+#
+
+pipaos_network=/boot/interfaces.txt
+
+case "$1" in
+
+    remove|upgrade)
+        insserv -r pipaos-init-network
+        rm -fv $pipaos_network
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

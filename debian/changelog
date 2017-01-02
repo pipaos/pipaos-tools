@@ -1,0 +1,23 @@
+pipaos-tools (1.0-4) unstable; urgency=low
+
+  * changed /boot interfaces file to txt for easier editing
+
+ -- Albert Casals <skarbat@gmail.com>  Wed, 18 Sep 2016 11:32:00 +0000
+
+pipaos-tools (1.0-3) unstable; urgency=low
+
+  * fixing network installation steps
+
+ -- Albert Casals <skarbat@gmail.com>  Wed, 14 Sep 2016 13:52:00 +0000
+
+pipaos-tools (1.0-2) unstable; urgency=low
+
+  * added network configuration on the boot partition
+
+ -- Albert Casals <skarbat@gmail.com>  Wed, 14 Sep 2016 13:32:00 +0000
+
+pipaos-tools (1.0-1) unstable; urgency=low
+
+  * pipaos-tools initial version
+
+ -- Albert Casals <skarbat@gmail.com>  Wed, 14 Sep 2016 00:00:00 +0100

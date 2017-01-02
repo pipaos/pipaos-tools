@@ -1,0 +1,62 @@
+#!/usr/bin/python
+#
+#  Simple command line tool to set wifi connection details
+#
+
+import os
+import sys
+
+def set_wireless_auth(essid, psk, conffile='/etc/network/interfaces'):
+    '''
+    Parses Debian interfaces configuration to replace ssid and psk
+    on the first occurence in the file.
+    '''
+    changed=False
+    ssid=None
+    passphrase=None
+
+    # open settings file
+    with open(conffile, 'r') as f:
+        settings=f.readlines()
+
+    # replace connection details
+    for j,line in enumerate(settings):
+        idx=line.find('wpa-ssid')
+        if idx != -1:
+            settings[j]='  wpa-ssid: {}\n'.format(essid)
+            changed=True
+            continue
+
+        idx=line.find('wpa-psk')
+        if idx != -1:
+            settings[j]='  wpa-psk: {}\n'.format(psk)
+            changed=True
+
+
+    with open(conffile, 'w') as f:
+        f.writelines(settings)
+
+    return changed
+
+
+if __name__ == '__main__':
+
+    if os.getuid() != 0:
+        print 'Root permissions needed, you can use sudo'
+        sys.exit(1)
+
+    if len(sys.argv) < 3:
+        print 'Syntax: pipaos-setwifi <essid> <psk>'
+        sys.exit(1)
+    else:
+        essid=sys.argv[1]
+        psk=sys.argv[2]
+    
+    print 'Changing wireless credentials...'
+    success=set_wireless_auth(essid, psk)
+    if success:
+        print 'done!'
+    else:
+        print 'failed :('
+
+    sys.exit(success == 0)
