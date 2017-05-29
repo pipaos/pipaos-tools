@@ -10,3 +10,9 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7, ifupdown
 Description: Simple collection of useful tools for pipaOS
 
+Package: pipaos-xgui
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends},
+   fluxbox, xinit, x11-apps, xclip, xsel, lxterminal,
+   xterm, xserver-xorg-video-fbturbo
+Description: X Desktop metapackage based on fluxbox
