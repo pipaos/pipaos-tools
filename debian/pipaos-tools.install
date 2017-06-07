@@ -1,2 +1,3 @@
 src/* /usr/bin
 init/pipaos-init-network /etc/init.d
+configuration/interfaces.txt /boot

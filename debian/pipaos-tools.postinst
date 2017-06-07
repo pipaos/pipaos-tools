@@ -3,13 +3,9 @@
 # debian postinst script
 #
 
-pipaos_network=/boot/interfaces.txt
-system_network=/etc/network/interfaces
-
 case "$1" in
 
     configure)
-        cp -fv $system_network $pipaos_network
         insserv pipaos-init-network
         ;;
 esac
