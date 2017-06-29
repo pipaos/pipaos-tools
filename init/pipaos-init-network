@@ -1,12 +1,12 @@
 #!/bin/sh -e
 ### BEGIN INIT INFO
 # Provides:          pipaos-init-network
-# Required-Start:    mountkernfs $local_fs
+# Required-Start:    $local_fs
 # Required-Stop:     $local_fs
 # Default-Start:     S
 # Default-Stop:      0 6
-# Short-Description: Prepare network on boot
-# Description:       Allows to setup network details on the /boot partition
+# Short-Description: Prepare wireless credentials.
+# Description:       Prepare wifi credentials from /boot partition into /etc/network
 ### END INIT INFO
 
 PATH="/sbin:/bin"
@@ -22,7 +22,7 @@ case "$1" in
         cp -fv $pipaos_network $system_network
         log_action_end_msg $?
         ;;
-    
+
     stop)
         ;;
 

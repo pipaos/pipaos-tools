@@ -1,3 +1,9 @@
+pipaos-tools (1.0-7) unstable; urgency=low
+
+  * fixed first boot not collecting network configuration
+
+ -- Albert Casals <skarbat@gmail.com>  Tue, 13 Jun 2017 22:19:00 +0100
+
 pipaos-tools (1.0-5) unstable; urgency=low
 
   * added default network configuration file
