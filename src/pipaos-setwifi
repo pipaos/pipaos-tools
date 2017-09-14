@@ -6,7 +6,7 @@
 import os
 import sys
 
-def set_wireless_auth(essid, psk, conffile='/etc/network/interfaces'):
+def set_wireless_auth(essid, psk, conffile='/boot/interfaces.txt'):
     '''
     Parses Debian interfaces configuration to replace ssid and psk
     on the first occurence in the file.

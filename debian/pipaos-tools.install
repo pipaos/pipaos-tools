@@ -1,5 +1,5 @@
 #!/usr/bin/dh-exec
 
 src/* /usr/bin
-init/pipaos-init-network /etc/init.d
-configuration/interfaces.txt /boot
+configuration/interfaces-pipaos.txt /usr/share/pipaos-tools
+

@@ -1,3 +1,10 @@
+pipaos-tools (1.0-18) unstable; urgency=low
+
+  * migrated init script to debian stretch systemd
+  * fixed pipaos-setwifi to work on the /boot interfaces file
+
+ -- Albert Casals <skarbat@gmail.com>  Mon, 11 Sep 2017 23:10:00 +0100
+
 pipaos-tools (1.0-7) unstable; urgency=low
 
   * fixed first boot not collecting network configuration

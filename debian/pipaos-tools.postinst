@@ -3,10 +3,16 @@
 # debian postinst script
 #
 
+pipaos_network=/boot/interfaces.txt
+
 case "$1" in
 
     configure)
-        insserv pipaos-init-network
+        if [ ! -f $pipaos_network ]; then
+            cp /usr/share/pipaos-tools/interfaces-pipaos.txt $pipaos_network
+        fi
+
+        ln -sfv "$pipaos_network" /etc/network/interfaces
         ;;
 esac
 

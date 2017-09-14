@@ -3,13 +3,20 @@
 # debian postinst script
 #
 
-pipaos_network=/boot/interfaces.txt
+initd_script="/etc/init.d/pipaos-init-network"
+systemd_script="/usr/lib/systemd/pipaos-init-network.service"
 
 case "$1" in
 
     remove|upgrade)
-        insserv -r pipaos-init-network
-        rm -fv $pipaos_network
+        if [ -f "$initd_script" ]; then
+            rm "$initd_script"
+        fi
+
+        if [ -f "$systemd_script" ]; then
+            systemctl disable pipaos-init-network
+            rm "$systemd_script"
+        fi
         ;;
 esac
 
