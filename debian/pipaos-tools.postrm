@@ -5,10 +5,12 @@
 
 initd_script="/etc/init.d/pipaos-init-network"
 systemd_script="/usr/lib/systemd/pipaos-init-network.service"
+bootup_logo="/usr/share/pipaos-tools/logos/default.png"
 
 case "$1" in
 
     remove|upgrade)
+
         if [ -f "$initd_script" ]; then
             rm "$initd_script"
         fi
@@ -17,6 +19,12 @@ case "$1" in
             systemctl disable pipaos-init-network
             rm "$systemd_script"
         fi
+
+        # remove the manually set symlink
+        if [ -h "$bootup_logo" ]; then
+            rm -f "$bootup_logo"
+            rm -rf /usr/share/pipaos-tools
+        fi        
         ;;
 esac
 

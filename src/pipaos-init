@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#  pipaos-init
+#
+#  A linux init wrapper script
+#
+
+# Display bootup logo image if available
+logo_file="/usr/share/pipaos-tools/logos/default.png"
+if [ -f "$logo_file" ]; then
+    layer=1
+    /usr/share/raspidmx/samples/pngview -n -l $layer "$logo_file" &
+fi
+
+exec /sbin/init
