@@ -23,7 +23,6 @@ case "$1" in
         # remove the manually set symlink
         if [ -h "$bootup_logo" ]; then
             rm -f "$bootup_logo"
-            rm -rf /usr/share/pipaos-tools
         fi        
         ;;
 esac
