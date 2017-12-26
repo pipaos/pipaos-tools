@@ -5,6 +5,9 @@
 #  A linux init wrapper script
 #
 
+echo "pipaOS boot..." > /dev/console
+/bin/sleep 1
+
 # Display bootup logo image if available
 logo_file="/usr/share/pipaos-tools/logos/default.png"
 if [ -f "$logo_file" ]; then
