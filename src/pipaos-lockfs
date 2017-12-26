@@ -70,6 +70,15 @@ class LockFS():
         with open(self.fstab, 'w') as f:
             f.writelines(mounts)
 
+        # Allow DHCP to write the DNS servers in read-only,
+        # otherwise networking would be broken in block mode.
+        if mode == 'ro':
+            os.system('touch /tmp/resolv.conf')
+            os.system('ln -sfv /tmp/resolv.conf /etc/resolv.conf')
+        else:
+            os.system('rm -f /etc/resolv.conf')
+            os.system('mv -f /tmp/resolv.conf /etc/resolv.conf')
+
         return True
 
     def remount(self, mode, persistent):
