@@ -56,13 +56,13 @@ def set_credentials(essid, psk, conffile):
 
         idx=line.find('ssid=')
         if idx != -1:
-            settings[j]='  ssid={}\n'.format(essid)
+            settings[j]='  ssid="{}"\n'.format(essid)
             changed=True
             continue
 
         idx=line.find('psk=')
         if idx != -1:
-            settings[j]='  psk={}\n'.format(psk)
+            settings[j]='  psk="{}"\n'.format(psk)
             changed=True
             continue
 
