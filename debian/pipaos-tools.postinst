@@ -8,11 +8,17 @@ pipaos_network=/boot/interfaces.txt
 case "$1" in
 
     configure)
+
+        # Expose network interfaces file to Boot partition
         if [ ! -f $pipaos_network ]; then
             cp /usr/share/pipaos-tools/interfaces-pipaos.txt $pipaos_network
         fi
 
         ln -sfv "$pipaos_network" /etc/network/interfaces
+
+        # Activate the bootup loog
+        ln -sfv -r /usr/share/pipaos-tools/logos/linux-pipaos-800x600.png /usr/share/pipaos-tools/logos/default.png
+        systemctl enable pipaos-bootlogo.service
         ;;
 esac
 

@@ -1,3 +1,9 @@
+pipaos-tools (1.1-0) unstable; urgency=low
+
+  * Added replacement init script to display bootup logo
+
+ -- Albert Casals <skarbat@gmail.com>  Tue, 27 Dec 2017 11:55:00 +0100
+
 pipaos-tools (1.0-18) unstable; urgency=low
 
   * migrated init script to debian stretch systemd

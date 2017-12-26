@@ -1,0 +1,11 @@
+[Unit]
+Description = PipaOS stop the boot logo
+After = remote-fs.target getty.target
+Wants = getty.target
+
+[Service]
+Type = simple
+ExecStart = /usr/bin/pkill -f pngview
+
+[Install]
+WantedBy = multi-user.target

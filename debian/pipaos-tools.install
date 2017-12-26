@@ -2,4 +2,5 @@
 
 src/* /usr/bin
 configuration/interfaces-pipaos.txt /usr/share/pipaos-tools
-
+logos /usr/share/pipaos-tools
+systemd/pipaos-bootlogo.service /lib/systemd/system

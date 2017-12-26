@@ -7,7 +7,7 @@ Build-Depends: debhelper (>=9.0.0), dh-exec
 
 Package: pipaos-tools
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7, ifupdown
+Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7, ifupdown, raspidmx
 Description: Simple collection of useful tools for pipaOS
 
 Package: pipaos-xgui
