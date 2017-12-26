@@ -6,10 +6,31 @@
 import os
 import sys
 
-def set_wireless_auth(essid, psk, conffile='/boot/interfaces.txt'):
+# Wireless credential files in pipaOS stretch and jessie
+file_wpa='/boot/wpa_supplicant.txt'
+file_interfaces='/boot/interfaces.txt'
+
+
+def set_wireless_auth(essid, psk):
+    '''
+    Sets the wireless credentials on the interfaces file (debian jessie)
+    Or the wpa supplicant file (debian stretch)
+    This wrapper is provided to support legacy pipaOS jessie.
+    '''
+    changed=False
+
+    if os.path.isfile(file_wpa):
+        changed = set_credentials(essid, psk, file_wpa)
+
+    if os.path.isfile(file_interfaces):
+        changed = set_credentials(essid, psk, file_interfaces)
+
+    return changed
+
+
+def set_credentials(essid, psk, conffile):
     '''
     Parses Debian interfaces configuration to replace ssid and psk
-    on the first occurence in the file.
     '''
     changed=False
     ssid=None
@@ -31,6 +52,19 @@ def set_wireless_auth(essid, psk, conffile='/boot/interfaces.txt'):
         if idx != -1:
             settings[j]='  wpa-psk: {}\n'.format(psk)
             changed=True
+            continue
+
+        idx=line.find('ssid=')
+        if idx != -1:
+            settings[j]='  ssid={}\n'.format(essid)
+            changed=True
+            continue
+
+        idx=line.find('psk=')
+        if idx != -1:
+            settings[j]='  psk={}\n'.format(psk)
+            changed=True
+            continue
 
 
     with open(conffile, 'w') as f:
