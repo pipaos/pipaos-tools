@@ -8,7 +8,7 @@ case "$1" in
     configure)
 
         # Activate the bootup loog
-        ln -sfv -r /usr/share/pipaos-tools/logos/linux-pipaos-800x600.png /usr/share/pipaos-tools/logos/default.png
+        ln -sf -r /usr/share/pipaos-tools/logos/pipaos-doityourself.png /usr/share/pipaos-tools/logos/default.png
         systemctl enable pipaos-bootlogo.service
         ;;
 esac

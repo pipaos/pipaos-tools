@@ -1,3 +1,10 @@
+pipaos-tools (1.1-7) unstable; urgency=low
+
+  * Replaced system bootup logo, thanks to Dovah
+  * Fixed bootup logo timing
+
+ -- Albert Casals <skarbat@gmail.com>  Thu, 30 Dec 2017 12:12:00 +0100
+
 pipaos-tools (1.1-5) unstable; urgency=low
 
   * Fixed broken networking when system was in locked mode
