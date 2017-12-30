@@ -5,7 +5,7 @@ Wants = getty.target
 
 [Service]
 Type = simple
-ExecStartPre = /bin/sleep 3
+ExecStartPre = /bin/sleep 7
 ExecStart = /usr/bin/pkill -f pngview
 
 [Install]
