@@ -1,0 +1,23 @@
+#
+#  pipaos-usbgadget.service
+#
+#  Allows to plug the RaspberryPI to a USB port,
+#  and expose a remote USB disk for easy file transfer.
+#
+#  IMPORTANT: You must enable "dtoverlay=dwc2" in config.txt
+#  The "file" must point to a FAT partition or image.
+#
+#  Enable feature with "systemctl enable pipaos-usbgadget.service" then reboot
+#
+
+[Unit]
+Description = Mount the Raspberry PI as a USB disk
+After = remote-fs.target getty.target
+Wants = getty.target
+
+[Service]
+Type = oneshot
+ExecStart = /sbin/modprobe g_mass_storage file=/usbgadget.img stall=0
+
+[Install]
+WantedBy = multi-user.target
