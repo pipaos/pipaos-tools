@@ -1,0 +1,83 @@
+#!/usr/bin/python
+#
+#  Creates a new FAT32 partition on the gap between the last partition and the physical SDcard size.
+#  If you burn pipaOS on a 128GB SDcard, the OS will take about 2GB, the FAT partition will have about 126GB.
+#
+#  | MBR | FAT FAT | PIPAOS SYSTEM | *GAP* | END |
+#
+#  This process can be triggered during the custom init process.
+#
+
+import os
+import sys
+
+class SDCardPartitions():
+
+    def __init__(self, parted='/sbin/parted', disk='/dev/mmcblk0', debug=False):
+        self.parted='{} --script --machine {}'.format(parted, disk)
+        self.debug=debug
+
+    def get_last_partition(self):
+        '''
+        Finds the last partition on the disk and returns a dictionary with details
+        '''
+        items=['number', 'start', 'end', 'size', 'fs']
+        command='{} print'.format(self.parted)
+        if self.debug:
+            print '>', command
+
+        partitions=os.popen(command).readlines()
+        if self.debug:
+            print '>', partitions
+
+        last=partitions[len(partitions)-1].strip().split(':')
+        dictlast=dict(zip(items, last))
+        return dictlast
+
+    def create_gap_partition(self, last_partition, partition_type='fat32'):
+        '''
+        Creates a new partition to fit the gap between the last partition and the disk size
+        '''
+        start=last_partition['end']
+        end='100%'
+        print 'Creating gap partition of type {} starting at {} ending at {}'.format(partition_type, start, end)
+        command='{} mkpart primary {} {} {}'.format(self.parted, partition_type, start, end)
+        if self.debug:
+            print '>', command
+
+        rc=os.system(command)
+        return rc==0
+
+
+
+if __name__ == '__main__':
+
+    # TODO: provide command line options
+    created=False
+    debug=False
+    doformat=True
+    disk='/dev/mmcblk0'
+    label='DATA'
+
+    if os.getuid() != 0:
+        print 'You must be root'
+        sys.exit(1)
+    
+    partitions=SDCardPartitions(debug=debug)
+    last=partitions.get_last_partition()
+    print 'Last disk partition:', last
+    if last['fs'] == 'ext4':
+        print 'Gap found, filling it up with partition'
+        created=partitions.create_gap_partition(last, partition_type='fat32')
+        gap=partitions.get_last_partition()
+        print 'Gap created?', created
+
+        if doformat and created:
+            gap_partition='{}p{}'.format(disk, gap['number'])
+            print 'Formatting:', gap_partition
+            rc=os.system('/sbin/mkfs.vfat -n {} -v -F 32 {}'.format(label, gap_partition))
+            created = rc==0
+    else:
+        print 'Last partition is FAT, nothing to do'
+
+    sys.exit(0 if created else 1)
