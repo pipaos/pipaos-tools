@@ -2,11 +2,18 @@
 #
 #  pipaos-init
 #
-#  A linux init wrapper script
+#  A linux init wrapper script, with an optional custom hook script.
 #
+
+custom_init="/usr/bin/pipaos-init-custom"
 
 echo "pipaOS boot..." > /dev/console
 /bin/sleep 1
+
+if [ -x "$custom_init" ]; then
+    echo "Running custom boot..." > /dev/console
+    $custom_init
+fi
 
 # Display bootup logo image if available
 logo_file="/usr/share/pipaos-tools/logos/default.png"
