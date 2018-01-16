@@ -5,14 +5,10 @@
 #  A linux init wrapper script, with an optional custom hook script.
 #
 
+# Run a custom script if installed
 custom_init="/usr/bin/pipaos-init-custom"
-
-echo "pipaOS boot..." > /dev/console
-/bin/sleep 1
-
 if [ -x "$custom_init" ]; then
-    echo "Running custom boot..." > /dev/console
-    $custom_init
+    $custom_init > /dev/null 2>&1
 fi
 
 # Display bootup logo image if available

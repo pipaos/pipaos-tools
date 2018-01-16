@@ -1,4 +1,4 @@
-pipaos-tools (1.2-0) unstable; urgency=low
+pipaos-tools (1.2-1) unstable; urgency=low
 
   * Added optional hook script to init process
   * Added service to turn the RPi into a USB disk device
