@@ -2,20 +2,9 @@
 #
 #  pipaos-init
 #
-#  A linux init wrapper script, with an optional custom hook script.
+#  A linux init wrapper script, with custom scripts folder to suit your needs
 #
 
-# Run a custom script if installed
-custom_init="/usr/bin/pipaos-init-custom"
-if [ -x "$custom_init" ]; then
-    $custom_init > /dev/null 2>&1
-fi
-
-# Display bootup logo image if available
-logo_file="/usr/share/pipaos-tools/logos/default.png"
-if [ -f "$logo_file" ]; then
-    layer=1
-    /usr/share/raspidmx/samples/pngview -n -l $layer "$logo_file" &
-fi
-
+init_folder="/etc/pipaos-init.d"
+/bin/run-parts "$init_folder"
 exec /sbin/init

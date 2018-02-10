@@ -1,6 +1,7 @@
 #!/usr/bin/dh-exec
 
 src/* /usr/bin
+pipaos-init.d /etc
 configuration/interfaces-pipaos.txt /usr/share/pipaos-tools
 logos /usr/share/pipaos-tools
 systemd/pipaos-bootlogo.service /usr/lib/systemd/system

@@ -1,10 +1,11 @@
-pipaos-tools (1.2-1) unstable; urgency=low
+pipaos-tools (1.2-2) unstable; urgency=low
 
+  * Added customizable init script folder thanks to run-parts
   * Added optional hook script to init process
   * Added service to turn the RPi into a USB disk device
   * Added script to create a FAT32 gap partition
 
- -- Albert Casals <skarbat@gmail.com>  Sun, 07 Jan 2018 12:45:00 +0100
+ -- Albert Casals <skarbat@gmail.com>  Sat, 10 Feb 2018 21:35:00 +0100
 
 pipaos-tools (1.1-7) unstable; urgency=low
 
